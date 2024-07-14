@@ -1,3 +1,4 @@
+using Application.Mappings;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,6 +14,8 @@ public static class DependencyInjection
             configuration.RegisterServicesFromAssembly(assembly));
 
         services.AddValidatorsFromAssembly(assembly);
+        
+        services.AddAutoMapper(typeof(PricingMappingProfile));
 
         return services;
     }
