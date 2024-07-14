@@ -1,5 +1,3 @@
-using Domain.Primitives;
-
 namespace Contracts.Pricing;
 
 public sealed record CreatePricingRequest(

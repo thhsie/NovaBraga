@@ -11,7 +11,7 @@ namespace Application.Pricing.GetByProductId;
 
 public class GetPricingByProductIdQueryHandler(
     IValidator<GetPricingByProductIdQuery> validator,
-    IPricingRepository pricingRepository,
+    IPricingReadOnlyRepository pricingRepository,
     IMapper mapper) : IRequestHandler<GetPricingByProductIdQuery, Result<GetPricingByProductIdResponse>>
 {
     public async Task<Result<GetPricingByProductIdResponse>> Handle(

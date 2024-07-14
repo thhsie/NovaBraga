@@ -2,7 +2,7 @@ using Ardalis.Result;
 using Ardalis.Result.FluentValidation;
 using Contracts.Pricing;
 using Domain.Pricing;
-using Domain.Primitives;
+using Domain.SharedKernel;
 using FluentValidation;
 using MediatR;
 
@@ -10,7 +10,7 @@ namespace Application.Pricing.Create;
 
 public class CreatePricingCommandHandler(
     IValidator<CreatePricingCommand> validator,
-    IPricingRepository pricingRepository,
+    IPricingWriteOnlyRepository pricingRepository,
     IDateTimeProvider dateTimeProvider,
     IUnitOfWork unitOfWork) : IRequestHandler<CreatePricingCommand, Result<CreatedPricingResponse>>
 {
