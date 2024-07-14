@@ -1,4 +1,4 @@
-using Domain.Primitives;
+using Domain.SharedKernel;
 
 namespace Domain.Products;
 

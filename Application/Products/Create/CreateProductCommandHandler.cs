@@ -1,8 +1,8 @@
 using Ardalis.Result;
 using Ardalis.Result.FluentValidation;
 using Contracts.Products;
-using Domain.Primitives;
 using Domain.Products;
+using Domain.SharedKernel;
 using FluentValidation;
 using MediatR;
 
@@ -10,7 +10,7 @@ namespace Application.Products.Create;
 
 public class CreateProductCommandHandler(
     IValidator<CreateProductCommand> validator,
-    IProductRepository productRepository,
+    IProductWriteOnlyRepository productRepository,
     IUnitOfWork unitOfWork) : IRequestHandler<CreateProductCommand, Result<CreatedProductResponse>>
 {
     public async Task<Result<CreatedProductResponse>> Handle(

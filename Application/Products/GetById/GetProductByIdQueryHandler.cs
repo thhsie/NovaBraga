@@ -8,7 +8,7 @@ namespace Application.Products.GetById;
 
 public class GetProductByIdQueryHandler(
     IValidator<GetProductByIdQuery> validator,
-    IProductRepository productRepository
+    IProductReadOnlyRepository productRepository
     ) : IRequestHandler<GetProductByIdQuery, Result<Product>>
 {
     public async Task<Result<Product>> Handle(
@@ -23,7 +23,7 @@ public class GetProductByIdQueryHandler(
         }
 
         // Instantiate
-        var product = await productRepository.GetByIdAsync(request.Id, cancellationToken);
+        var product = await productRepository.GetByIdAsync(request.Id);
 
         // Return
         return product is null ? 

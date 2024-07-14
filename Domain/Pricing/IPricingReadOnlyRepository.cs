@@ -1,8 +1,8 @@
+using Domain.SharedKernel;
+
 namespace Domain.Pricing;
 
-public interface IPricingRepository
+public interface IPricingReadOnlyRepository : IReadOnlyRepository<Pricing, Guid>
 {
     Task<IEnumerable<Pricing>> GetByProductIdAsync(Guid productId, CancellationToken cancellationToken = default);
-
-    void Insert(Pricing pricing);
 }
