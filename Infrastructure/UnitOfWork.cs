@@ -9,7 +9,6 @@ namespace Infrastructure;
 
 internal sealed class UnitOfWork(
     NovaBragaDbContext novaBragaDbContext,
-    IMediator mediator,
     ILogger<UnitOfWork> logger) : IUnitOfWork
 {
     public async Task SaveChangesAsync()

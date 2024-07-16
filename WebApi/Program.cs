@@ -1,20 +1,20 @@
 using Application;
 using Infrastructure;
-using Presentation;
-using Serilog;
+using Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
+using WebApi.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<NovaBragaDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection")));
+
 builder.Services
     .AddApplication()
-    .AddInfrastructure()
-    .AddPresentation();
-
-builder.Host.UseSerilog((context, configuration) =>
-    configuration.ReadFrom.Configuration(context.Configuration));
+    .AddInfrastructure();
 
 var app = builder.Build();
 
@@ -24,8 +24,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseSerilogRequestLogging();
-
 app.UseHttpsRedirection();
+
+app.MapProductEndpoints();
+app.MapPricingEndpoints();
 
 app.Run();
