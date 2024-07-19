@@ -3,28 +3,29 @@
     driver: bridge
     
 services:
-  webapi:
-    image: ${DOCKER_REGISTRY-}novabraga-webapi
-    container_name: novabraga-webapi
+  nova-webapi:
+    image: ${DOCKER_REGISTRY-}nova-webapi
+    container_name: nova-webapi
     build:
       context: .
       dockerfile: WebApi/Dockerfile
     expose:
       - 80
+    ports:
+      - "8080:80"
     links:
-      - novabraga-sql-server
+      - nova-sql-server
     networks:
       - app-network
     depends_on:
-      - novabraga-sql-server
+      - nova-sql-server
         
 
-  novabraga-sql-server:
+  nova-sql-server:
     image: mcr.microsoft.com/azure-sql-edge:latest
     cap_add: [ 'SYS_PTRACE' ]
     hostname: mssql
-    container_name: novabraga-sql-server
-    restart: always
+    container_name: nova-sql-server
     expose:
       - 1433
     ports:
