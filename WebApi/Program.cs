@@ -3,6 +3,7 @@ using Infrastructure;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using WebApi.Endpoints;
+using WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,4 +30,4 @@ app.UseHttpsRedirection();
 app.MapProductEndpoints();
 app.MapPricingEndpoints();
 
-app.Run();
+await app.RunAppAsync();
